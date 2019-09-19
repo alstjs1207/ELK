@@ -1,0 +1,66 @@
+elastic Search 와 DB 비교
+
+index     --- Databases
+Type      --- table
+document  --- row
+field     --- column
+mapping   --- schema
+
+GET       --- select
+PUT       --- update
+POST      --- insert
+DELETE    ---delete
+_id       --- pk
+
+7.0 버전이후 Type 이 삭제
+
+
+## 모든 index 조회
+curl -XGET '127.0.0.1:9200/_cat/indices?v'
+
+
+## index 생성
+curl -XPUT 127.0.0.1:9200/classes?pretty
+
+
+## type 생성 및 도큐먼트(document = row) 생성
+
+elasticsearch 6버전이후부터 json데이터를 사용시 head값을 상세히 적어줘야 한다.
+
+-H 'Content-Type: application/json'
+
+curl -H 'Content-Type: application/json' -XPOST 127.0.0.1:9200/classes/class/2/?pretty -d '{"title":"music","professor":"WHO"}'
+
+## 검색(GET = select)
+curl -XGET 127.0.0.1:9200/classes/class/2?pretty
+
+## 모든 document(row) 조회
+curl -XGET 'localhost:9200/_all/_search?pretty'
+
+
+
+## 데이터 조회
+curl -XGET 'localhost:9200/board/user/1?pretty&filter_path=_source'
+
+
+## document 수정
+curl -XPUT 'localhost:9200/board/user/1?pretty' -H 'Content-Type: application/json' -d
+'{"userid":"cat",
+"password":"qwer1234",
+"nickname":"cats",
+"regdate":"20190918",
+"moddate":"20190918"
+}'
+
+업데이트 할때에는 전체 데이터를 넣어야한다.( 바꾸는 데이터만 넣을경우 해당 데이터만 존재)
+
+
+## document 삭제
+curl -XDELETE 'localhost:9200/classes/class/1?pretty'
+
+
+
+
+
+
+
