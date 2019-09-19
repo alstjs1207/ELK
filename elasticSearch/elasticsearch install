@@ -1,0 +1,41 @@
+# Elasticsearch 다운로드 및 설치
+
+
+
+다운로드 경로
+https://www.elastic.co/kr/downloads/elasticsearch
+
+
+
+
+
+# RPM 다운로드 
+
+해당 명령어 실행으로 설치
+rpm -i elasticsearch-7.3.2-x86_64.rpm
+
+
+
+# 방화벽 설정
+
+
+
+firewall-cmd --permanent --zone=public --add-port=9200/tcp
+firewall-cmd --reload
+firewall-cmd --list-ports
+
+
+# ElasticSearch 생성 경로 확인
+
+
+
+/usr/share/elasticsearch
+/etc/elasticsearch
+/etc/init.d/elasticsearch
+
+
+# ElasticSearch 기동
+
+
+systemctl enable elasticsearch.service
+service elasticsearch start
