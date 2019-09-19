@@ -1,0 +1,30 @@
+
+## kibana 다운로드 및 설치 
+
+다운로드 경로
+https://www.elastic.co/kr/downloads/kibana
+
+
+## kibana 설치
+
+rpm -i kibana-7.3.2-x86_64.rpm
+
+몇분정도 시간이 걸림
+
+
+## kibana.yml 파일 수정
+/etc/kibana/kibana.yml
+
+server.port: 5601
+server.host : "host"
+elasticsearch.hosts : ["http://ip:9200"]
+
+
+## kibana 기동
+
+service kibana start
+
+## kibana 접속
+
+http://ip:5601
+
