@@ -1,0 +1,34 @@
+
+#APM 설치 ( Linux )
+
+rpm 다운 받기
+curl -L -O https://artifacts.elastic.co/downloads/apm-server/apm-server-7.3.2-x86_64.rpm
+
+다운받은 rpm 설치하기
+rpm -vi apm-server-7.3.2-x86_64.rpm
+
+설치된 경로에 환경 설정 하기
+cd /etc/apm-server/
+apm-server.yml
+( 기본 설정 그대로 진행)
+
+apm 서버 기동
+service apm-server start
+
+# APM 과 시스템 연동
+(여기서는 tomcat 서버와 연동)
+
+연동방식은 몇가지가 있는데 그중에서 jar파일을 이용한 연동방식으로 진행
+
+해당 파일을 다운로드
+apm-agent-attach-1.9.0-standalone.jar
+
+pid입력 부분에 apm과 연동할 pid를 입력
+java -jar apm-agent-attach-1.9.0-standalone.jar --pid pid입력 --args 'service_name=idm-service;server_urls=http://localhost:8200'
+
+진행 완료
+--args is deprecated in favor of --config
+INFO Attaching the Elastic APM agent to pid
+INFO Done
+
+이후 kibana에 접속하여 apm연동이 잘되었는지 APM 메뉴로 들어가서 확인!
