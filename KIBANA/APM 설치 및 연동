@@ -32,3 +32,7 @@ INFO Attaching the Elastic APM agent to pid
 INFO Done
 
 이후 kibana에 접속하여 apm연동이 잘되었는지 APM 메뉴로 들어가서 확인!
+
+#서버에서 연동된 list 확인
+java -jar apm-agent-attach-1.9.0-standalone.jar --list
+
