@@ -1,0 +1,65 @@
+
+#Logstash 다운
+
+https://www.elastic.co/downloads/logstash
+
+
+#jdbc 라이브러리 다운받아서 경로에 설정
+
+jdbc 목록 확인
+./bin/logstash-plugin list jdbc
+
+플러그인 설치
+./bin/logstash-plugin install logstash-input-jdbc
+
+#mysql connector 다운받기
+
+mysql-connector-java-5.1.33.jar 사용
+
+
+
+
+#jdbc 설정
+
+logstash.conf 파일을 생성
+
+생성 후
+
+input {
+   stdin {}
+   jdbc {         
+        jdbc_driver_class => "com.mysql.jdbc.Driver"        
+        jdbc_connection_string => "jdbc:mysql://127.0.0.1:3306/DB?useUnicode=true&characterEncoding=utf-8"        
+        jdbc_user => "root"        
+        jdbc_password => "qwer1234"        
+        statement => "SELECT * FROM INSPECTOR"        
+        schedule => "*/5 * * * *"                
+    }
+
+}
+output {
+  elasticsearch {
+        hosts => ["localhost:9200"]
+        index => "inspector"
+         }
+  stdout { codec => rubydebug }
+}
+
+
+jdbc관련 정보 설정
+schedule => crontab 처럼 스케쥴러 설정
+보통 jdbc_driver_library을 설정 후 해당 경로에 라이브러리를 넣지만, 
+저는 경로를 못찾는다는 에러가 발생...
+
+검색을 해본 결과
+
+설정을 제거하고
+
+/usr/share/logstash/logstash-core/lib/jars 경로에 mysql 라이브러리를 import주면 됩니다.
+관련 정보는 아래 링크를 보시면 됩니다.
+
+https://discuss.elastic.co/t/logstash-7-3-0-failed-to-load-mssql-jdbc-7-4-1-jre11-jar/196319/2
+
+
+
+
