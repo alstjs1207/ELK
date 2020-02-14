@@ -20,9 +20,13 @@ server.host : "host"
 elasticsearch.hosts : ["http://ip:9200"]
 
 
-## kibana 기동
+## kibana 기동/중지
 
-service kibana start
+service kibana start/
+
+## kibana 상태
+
+service kibana status
 
 ## kibana 접속
 
