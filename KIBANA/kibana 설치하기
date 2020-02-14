@@ -22,7 +22,7 @@ elasticsearch.hosts : ["http://ip:9200"]
 
 ## kibana 기동/중지
 
-service kibana start/
+service kibana start/stop
 
 ## kibana 상태
 
